@@ -5,9 +5,9 @@ public class Validator
     public static String getString(Scanner sc, String prompt)
     {
         System.out.print(prompt);
-        String s = sc.nextLine();  // read user entry
+        String scan = sc.nextLine();  // read user entry
         //sc.nextLine();  // discard any other data entered on the line
-        return s;
+        return scan;
     }
 
     public static int getInt(Scanner sc, String prompt)

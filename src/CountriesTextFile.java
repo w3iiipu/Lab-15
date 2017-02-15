@@ -4,8 +4,7 @@ import java.nio.file.Paths;
 
 public class CountriesTextFile {
 
-    public static void writeCountriesToFile (String fileName, String Input)
-    {
+    public static void writeCountriesToFile(String fileName, String Input) {
 
 
         Path filePath = Paths.get(fileName);
@@ -27,8 +26,7 @@ public class CountriesTextFile {
     }
 
 
-    public static StringBuilder readCountriesFile(String fileName)
-    {
+    public static StringBuilder readCountriesFile(String fileName) {
 
         Path filePath = Paths.get(fileName);
 
@@ -48,11 +46,56 @@ public class CountriesTextFile {
             }
             reader.close();
             return result;
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             return null;
-        }catch (IOException e){
+        } catch (IOException e) {
             return null;
         }
+    }
+
+
+
+
+    public static void removeCountryFromFile(String fileName, String input) {
+        //read
+        Path filePath = Paths.get(fileName);
+        File countries = filePath.toFile();
+
+        //write
+        Path temp = Paths.get("temp.txt");
+        File tempFile = temp.toFile();
+
+
+        try {
+
+            FileReader r = new FileReader(countries);
+            BufferedReader reader = new BufferedReader(r);
+            PrintWriter out = new PrintWriter(new FileOutputStream(tempFile, false));
+
+            String line = reader.readLine();
+            while (line != null) {
+                if (!line.equalsIgnoreCase(input)) {
+
+                    out.println(line);
+                }
+
+                line = reader.readLine();
+
+            }
+
+            out.close();
+            reader.close();
+
+            countries.delete();
+            tempFile.renameTo(countries);
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+
+        }
+
+
     }
 
 
